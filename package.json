@@ -6,6 +6,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@headlessui/react": "^1.6.6",
+    "axios": "^0.27.2",
     "flowbite": "^1.5.1",
     "flowbite-react": "^0.1.5",
     "next": "latest",
