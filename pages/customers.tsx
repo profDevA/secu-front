@@ -36,8 +36,6 @@ const Customers: NextPage = () => {
     fetchCustomers();
   }, []);
 
-  console.log("customers", customers);
-
   const createCustomer = () => {
     if (!email || !name) {
       return;
@@ -45,8 +43,30 @@ const Customers: NextPage = () => {
     axios
       .post(`${API_URL}/customers`, { name, email, walletAmount })
       .then((response) => {
-        console.log(response.data);
+        setCustomers([...customers, response.data]);
+
+        resetModal();
       });
+  };
+
+  const resetModal = () => {
+    setName("");
+    setEmail("");
+    setWalletAmount(0);
+    setOpen(false);
+  };
+
+  const deleteCustomer = (id: string) => {
+    axios.delete(`${API_URL}/customers/${id}`).then((response) => {
+      // delete item in array
+      if (response.status === 204) {
+        let temp = [...customers];
+        let i = temp.findIndex((customer) => customer.id === id);
+        temp.splice(i, 1);
+
+        setCustomers(temp);
+      }
+    });
   };
 
   return (
@@ -107,7 +127,7 @@ const Customers: NextPage = () => {
                       <a
                         href="#"
                         className="font-medium text-blue-600 hover:underline dark:text-blue-500"
-                        onClick={() => console.log("asdfasdfds")}
+                        onClick={() => deleteCustomer(customer.id)}
                       >
                         Delete
                       </a>
