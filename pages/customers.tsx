@@ -56,41 +56,67 @@ const Customers: NextPage = () => {
         <div className="mb-4">
           <Button onClick={() => setOpen(!open)}>Create Customer</Button>
         </div>
-        <Table>
-          <Table.Head>
-            <Table.HeadCell>Name</Table.HeadCell>
-            <Table.HeadCell>Email</Table.HeadCell>
-            <Table.HeadCell>Wallet Balance</Table.HeadCell>
-            <Table.HeadCell>
-              <span className="sr-only">Action</span>
-            </Table.HeadCell>
-          </Table.Head>
-          <Table.Body className="divide-y">
-            {customers &&
-              customers.length &&
-              customers.map((customer) => (
-                <Table.Row
-                  className="bg-white dark:border-gray-700 dark:bg-gray-800"
-                  key={customer.id}
-                >
-                  <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                    {customer.name}
-                  </Table.Cell>
-                  <Table.Cell>{customer.email}</Table.Cell>
-                  <Table.Cell>{customer.walletAmount}</Table.Cell>
-                  <Table.Cell>
-                    <a
-                      href="#"
-                      className="font-medium text-blue-600 hover:underline dark:text-blue-500"
-                      onClick={() => console.log("asdfasdfds")}
-                    >
-                      Edit
-                    </a>
-                  </Table.Cell>
-                </Table.Row>
-              ))}
-          </Table.Body>
-        </Table>
+
+        <div className="table w-full p-2">
+          <table className="w-full border">
+            <thead>
+              <tr className="bg-gray-50 border-b">
+                <th className="p-2 border-r cursor-pointer text-sm font-thin text-gray-500">
+                  <div className="flex items-center justify-center">Name</div>
+                </th>
+                <th className="p-2 border-r cursor-pointer text-sm font-thin text-gray-500">
+                  <div className="flex items-center justify-center">Email</div>
+                </th>
+                <th className="p-2 border-r cursor-pointer text-sm font-thin text-gray-500">
+                  <div className="flex items-center justify-center">
+                    Wallet Blance
+                  </div>
+                </th>
+                <th className="p-2 border-r cursor-pointer text-sm font-thin text-gray-500">
+                  <div className="flex items-center justify-center">Action</div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {customers &&
+                customers.length > 0 &&
+                customers.map((customer) => (
+                  <tr
+                    className="bg-gray-100 text-center border-b text-sm text-gray-600"
+                    key={customer.id}
+                  >
+                    <td className="p-2 border-r">
+                      <a
+                        href="#"
+                        className="font-medium text-blue-600 hover:underline dark:text-blue-500"
+                        onClick={() => console.log("asdfasdfds")}
+                      >
+                        {customer.name}
+                      </a>
+                    </td>
+                    <td className="p-2 border-r">{customer.email}</td>
+                    <td className="p-2 border-r">{customer.walletAmount}</td>
+                    <td>
+                      <a
+                        href="#"
+                        className="font-medium text-blue-600 hover:underline dark:text-blue-500 mr-4"
+                        onClick={() => console.log("asdfasdfds")}
+                      >
+                        Edit
+                      </a>
+                      <a
+                        href="#"
+                        className="font-medium text-blue-600 hover:underline dark:text-blue-500"
+                        onClick={() => console.log("asdfasdfds")}
+                      >
+                        Delete
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
       </div>
       <Transition.Root show={open} as={Fragment}>
         <Dialog
